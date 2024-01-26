@@ -9,6 +9,8 @@ class PointController {
 
       const parsedItems =String(items).split(',').map(item => Number(item.trim()))
 
+      console.log('Query Params:', { city, uf, items });
+      
       const point = await knex('points')
       .join('point_items', 'points.id','=','point_items.point_id')
       .whereIn('point_items.item_id', parsedItems)
@@ -49,7 +51,7 @@ class PointController {
 
         const trx = await knex.transaction();
         const point ={
-            image: 'image-fake',
+            image: 'https://images.unsplash.com/photo-1675034743339-0b0747047727?q=60&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             name,
             email,
             whatsapp,
